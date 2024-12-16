@@ -6,15 +6,7 @@ This is an example macro for controlling video outputs, presentations and far en
 
 ## Overview
 
-Go into detail about the implementation.   3-4 Sentences
-**HOW** the implementation works. You need not give end-to-end details but an overview.
-
-
-
-### Flow Diagram
-
-<!-- *MANDATORY*  Insert Your Flow Diagram Here (if small PoC, alternative option is to include break down how it works here instead of diagram) -->
-![image/gif](insert img link here)
+This macro easily lets you configurea an array of video presets for your RoomOS Devices and handled the starting of presentations, displaying of selfview and layout chanages.
 
 
 
@@ -22,22 +14,15 @@ Go into detail about the implementation.   3-4 Sentences
 
 ### Prerequisites & Dependencies: 
 
-- Is this dependant on having another repo
-- Insert pre-requisites in bullets
-- Insert pre-requisite here  Also state any assumptions that you may have made about the user.
-- Limit nested bullets
+- Codec EQ or Codec Pro with RoomOS 11.x or above
+- Web admin access to the device to upload the macro
 
-
-<!-- GETTING STARTED -->
 
 ### Installation Steps:
-1.  Include step one here
-    ```sh
-    insert line of code here if applicable
-    ```
-2.  Insert step two here
-    Insert screenshot, if applicable
-    
+
+1. Download the ``video-presets.js`` file and upload it to your Webex Devices Macro editor via the web interface.
+2. Configure the macro layouts config array by adding or removing video presets as required.
+3. Enable the Macro on the editor.
     
     
 ## Demo
