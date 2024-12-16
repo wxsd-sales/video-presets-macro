@@ -3,7 +3,7 @@
 
 This is an example macro for controlling video outputs, presentations and far end video on a Cisco RoomOS Device
 
-![Video Presets Macro](https://github.com/user-attachments/assets/3b7faf0e-bcb2-4beb-8264-c0a87111dd76)
+![Video Presets Macro](https://github.com/user-attachments/assets/4e5a0bde-2eee-461b-9185-0f51b22258e5)
 
 ## Overview
 
@@ -27,17 +27,7 @@ This macro easily lets you configurea an array of video presets for your RoomOS 
     
 ## Demo
 
-<!-- Insert link to the website below (if deployed). -->
-Check out our live demo, available [here](<insert link>)!
-
-<!-- Keep the following statement -->
 *For more demos & PoCs like this, check out our [Webex Labs site](https://collabtoolbox.cisco.com/webex-labs).
-
-
-<!-- Update your vidcast title, video screenshot, vidcast/youtube link & name -->
-[![Your Video Title ](assets/peer_support_main.PNG)](https://www.youtube.com/watch?v=SqZhiC8jHhU&t=10s, "<insert demo name here>")
-
-
 
 ## License
 
