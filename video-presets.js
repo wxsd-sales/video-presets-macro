@@ -33,10 +33,10 @@ const config = {
       options: [
         {
           name: 'Pres: 2,3 Floating SelfView LL',
-          Selfview:{
+          Selfview: {
             FullscreenMode: 'Off',
             Mode: 'On',
-            OnMonitorRole:'First',
+            OnMonitorRole: 'First',
             PIPPosition: 'LowerLeft'
           },
           MainVideoSource: {
@@ -47,22 +47,24 @@ const config = {
           Presentations: [
             {
               PresentationSource: [2],
-              Layout: 'Equal',
-              SendingMode: 'LocalRemote'
+              SendingMode: 'LocalOnly'
             },
             {
               PresentationSource: [3],
-              Layout: 'Equal',
+              SendingMode: 'LocalOnly'
+            },
+            {
+              PresentationSource: [7],
               SendingMode: 'LocalOnly'
             }
           ]
         },
         {
           name: 'Pres: 3,2 Floating SelfView UL',
-          Selfview:{
+          Selfview: {
             FullscreenMode: 'Off',
             Mode: 'On',
-            OnMonitorRole:'First',
+            OnMonitorRole: 'First',
             PIPPosition: 'UpperLeft'
           },
           MainVideoSource: {
@@ -83,12 +85,12 @@ const config = {
             }
           ]
         },
-         {
+        {
           name: 'Pres: 2 Layout: Focus',
-          Selfview:{
+          Selfview: {
             FullscreenMode: 'Off',
             Mode: 'On',
-            OnMonitorRole:'First',
+            OnMonitorRole: 'First',
             PIPPosition: 'UpperLeft'
           },
           MainVideoSource: {
@@ -97,6 +99,11 @@ const config = {
           },
           LayoutName: 'Focus',
           Presentations: [
+            {
+              PresentationSource: [3],
+              Layout: 'Equal',
+              SendingMode: 'LocalRemote'
+            },
             {
               PresentationSource: [2],
               Layout: 'Equal',
@@ -115,29 +122,18 @@ const config = {
 **********************************************************/
 
 let currentLayout;
-let callId = null;
-
 
 init();
 
 async function init() {
 
-  // Identify Video Outputs
-  const outputs = await xapi.Status.Video.Output.Connector.get();
-  console.log('outputs', outputs.length);
-
   await createPanel();
 
+  // Monitor Available Layouts and Apply currently selected Layout
   xapi.Status.Video.Layout.CurrentLayouts.AvailableLayouts.on(layout => {
     if (layout.ghost) return
     if (currentLayout != layout.LayoutName) return
     setLayout(currentLayout)
-  })
-
-
-  xapi.Status.Call.on(({ ghost, AnswerState, id }) => {
-    if (AnswerState && AnswerState == 'Answered' && callId != id) return processCallStart(id);
-    if (ghost && callId) return processCallEnd(id);
   })
 
   xapi.Event.UserInterface.Extensions.Widget.Action.on(async ({ Type, WidgetId, Value }) => {
@@ -148,7 +144,7 @@ async function init() {
     const [_panelId, pageNumber] = WidgetId.split('-');
     const matchedLayout = config.pages?.[pageNumber].options?.[Value]
 
-    console.log('matched layout:', matchedLayout)
+    console.log('Matched Selected Layout:', matchedLayout)
 
     const { MainVideoSource, Presentations, LayoutName } = matchedLayout;
 
@@ -169,27 +165,20 @@ function setMainVideoSource(sendingVideo) {
 
 async function setPresentations(presentations) {
   await xapi.Command.Presentation.Stop();
-
   presentations.forEach((presentation, index) => {
     setTimeout(async () => {
       console.log('Starting Presentation:', presentation)
       await xapi.Command.Presentation.Start({ ...presentation, Instance: index + 1 })
     }, 200 * (index + 1))
   })
-
 }
-
 
 
 function setLayout(layoutName) {
   currentLayout = layoutName;
   console.log('Setting layout to:', layoutName)
-  xapi.Command.Video.Layout.SetLayout({ LayoutName: layoutName }).catch(()=>console.debug('Could not set layout:', layoutName))
+  xapi.Command.Video.Layout.SetLayout({ LayoutName: layoutName }).catch(() => console.debug('Could not set layout:', layoutName))
 }
-
-
-
-
 
 function createButtonGroup(options, index) {
   const values = options.map((option, index) => {
