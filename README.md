@@ -3,6 +3,8 @@
 
 This is an example macro for controlling video outputs, presentations and far end video on a Cisco RoomOS Device
 
+![Video Presets Macro Example](https://github.com/user-attachments/assets/df59cd75-e4e0-4376-a14f-ceed8f51c2c0)
+
 
 ## Overview
 
