@@ -3,13 +3,11 @@
 
 This is an example macro for controlling video outputs, presentations and far end video on a Cisco RoomOS Device
 
-![Video Presets Macro Example](https://github.com/user-attachments/assets/df59cd75-e4e0-4376-a14f-ceed8f51c2c0)
-
+![Video Presets Macro](https://github.com/user-attachments/assets/9d13bc7c-b06d-4855-9d1c-0d401dab0003)
 
 ## Overview
 
 This macro easily lets you configurea an array of video presets for your RoomOS Devices and handled the starting of presentations, displaying of selfview and layout chanages.
-
 
 
 ## Setup
